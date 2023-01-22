@@ -1,0 +1,171 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hpName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "faName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "saName": {
+      "type": "string",
+      "defaultValue": "",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "aiName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "saSKU": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "dbConnectionString": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "dbName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "sbConnectionString": {
+      "type": "string",
+      "defaultValue": ""
+    }
+  },
+  "variables": {
+    "functionName": "SnapshotTriggerFunction",
+    "team": "TokenIndexer",
+    "walletQueue": "wallet-queue",
+    "dailyTriggerTime": "0 30 1 * * *"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('saName')]",
+      "apiVersion": "2019-06-01",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "Team": "[variables('team')]"
+      },
+      "kind": "StorageV2",
+      "sku": {
+        "name": "[parameters('saSKU')]"
+      },
+      "properties": {
+        "supportsHttpsTrafficOnly": true
+      }
+    },
+    {
+      "apiVersion": "2018-05-01-preview",
+      "name": "[parameters('aiName')]",
+      "type": "Microsoft.Insights/components",
+      "kind": "web",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('faName'))]": "Resource",
+        "Team": "[variables('team')]"
+      },
+      "properties": {
+        "Application_Type": "web",
+        "ApplicationId": "[parameters('aiName')]"
+      }
+    },
+    {
+      "name": "[parameters('hpName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2018-02-01",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name":"Y1",
+        "tier":"Dynamic"
+      },
+      "properties": {
+        "name": "[parameters('hpName')]",
+        "computeMode": "Dynamic"
+      },
+      "tags": {
+        "Team": "[variables('team')]"
+      }
+    },
+    {
+      "apiVersion": "2018-11-01",
+      "type": "Microsoft.Web/sites",
+      "name": "[parameters('faName')]",
+      "location": "[resourceGroup().location]",
+      "kind": "functionapp",
+      "dependsOn": [
+        "[resourceId('Microsoft.Insights/components', parameters('aiName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hpName'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('saName'))]"
+      ],
+      "tags": {
+        "Team": "[variables('team')]"
+      },
+      "properties" : {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hpName'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('saName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('saName')), '2019-06-01').keys[0].value)]"
+            },
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "~4"
+            },
+            {
+              "name": "FUNCTIONS_WORKER_RUNTIME",
+              "value": "dotnet"
+            },
+            {
+              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('saName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('saName')), '2019-06-01').keys[0].value)]"
+            },
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(resourceId('microsoft.insights/components', parameters('aiName')), '2015-05-01').InstrumentationKey]"
+            },
+            {
+              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+              "value": "[reference(resourceId('microsoft.insights/components/', parameters('aiName')), '2015-05-01').ConnectionString]"
+            },
+            {
+              "name": "WEBSITE_RUN_FROM_PACKAGE",
+              "value": "1"
+            },
+            {
+              "name": "DailyTriggerTime",
+              "value": "[variables('dailyTriggerTime')]"
+            },
+            {
+              "name": "WalletQueue",
+              "value": "[variables('walletQueue')]"
+            },
+            {
+              "name": "DbConnectionString",
+              "value": "[parameters('dbConnectionString')]"
+            },
+            {
+              "name": "DbName",
+              "value": "[parameters('dbName')]"
+            },
+            {
+              "name": "SbConnectionString",
+              "value": "[parameters('sbConnectionString')]"
+            }
+          ],
+          "ftpsState": "Disabled",
+          "clientAffinityEnabled": false,
+          "netFrameworkVersion": "v6.0"
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}

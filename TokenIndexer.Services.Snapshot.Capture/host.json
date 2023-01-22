@@ -1,0 +1,31 @@
+{
+    "version": "2.0",
+    "logging": {
+        "logLevel": {
+            "default": "Warning",
+            "Microsoft": "Warning",
+            "System.Net.Http.HttpClient.IRpcClient.ClientHandler": "Warning",
+            "System.Net.Http.HttpClient.IRpcClient.LogicalHandler": "Warning",
+            "System.Net.Http.HttpClient.INftApiClient.ClientHandler": "Warning",
+            "System.Net.Http.HttpClient.INftApiClient.LogicalHandler": "Warning",
+            "TokenIndexer.Services.Snapshot.Capture.QueueTriggerFunction": "Information"
+        },
+        "applicationInsights": {
+            "samplingSettings": {
+                "isEnabled": true,
+                "excludedTypes": "Event;Metric;Exception"
+            }
+        }
+    },
+    "functionTimeout": "00:10:00",
+    "extensions": {
+        "serviceBus": {
+            "prefetchCount": 0,
+            "messageHandlerOptions": {
+                "autoComplete": false,
+                "maxConcurrentCalls": 1,
+                "maxAutoRenewDuration": "00:05:00"
+            }
+        }
+    }
+}

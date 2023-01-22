@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hpName": {
+      "value": "beta-hp-snapshot-trigger"
+    },
+    "faName": {
+      "value": "beta-fa-snapshot-trigger"
+    },
+    "saName": {
+      "value": "tistoragetf"
+    },
+    "saSKU": {
+      "value": "Standard_LRS"
+    },
+    "aiName": {
+      "value": "beta-ai-snapshot-trigger"
+    },
+    "dbConnectionString": {
+      "value": "<your-db-connection-string>"
+    },
+    "dbName": {
+      "value": "TokenIndexerDb"
+    },
+    "sbConnectionString": {
+      "value": "<your-sb-connection-string>"
+    }
+  }
+}

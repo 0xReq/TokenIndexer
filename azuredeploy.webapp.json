@@ -1,0 +1,93 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hpName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "aiName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "webAppName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "webAppSku": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "ASPNETCORE_ENVIRONMENT": {
+      "type": "string",
+      "defaultValue": ""
+    }
+  },
+  "variables": {
+    "team": "TokenIndexer"
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-05-01-preview",
+      "name": "[parameters('aiName')]",
+      "type": "Microsoft.Insights/components",
+      "kind": "web",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webAppName'))]": "Resource",
+        "Team": "[variables('team')]"
+      },
+      "properties": {
+        "Application_Type": "web",
+        "ApplicationId": "[parameters('aiName')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2021-02-01",
+      "name": "[parameters('hpName')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('webAppSku')]"
+      },
+      "tags": {
+        "Team": "[variables('team')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2021-02-01",
+      "name": "[parameters('webAppName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "httpsOnly": true,
+        "clientAffinityEnabled": false,
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hpName'))]",
+        "siteConfig": {
+          "netFrameworkVersion": "v6.0",
+          "http20Enabled": true,
+          "ftpsState": "Disabled",
+          "alwaysOn": true,
+          "webSocketsEnabled": true,
+          "metadata": [
+            {
+              "name": "CURRENT_STACK",
+              "value": "dotnet"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "ASPNETCORE_ENVIRONMENT",
+              "value": "[parameters('ASPNETCORE_ENVIRONMENT')]"
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hpName'))]",
+        "[resourceId('Microsoft.Insights/components', parameters('aiName'))]"
+      ]
+    }
+  ],
+  "outputs": {}
+}

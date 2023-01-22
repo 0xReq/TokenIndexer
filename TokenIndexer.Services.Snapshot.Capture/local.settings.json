@@ -1,0 +1,14 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "RpcBaseAddress": "https://rpc.helius.xyz",
+        "NftApiBaseAddress": "https://api.helius.xyz",
+        "ApiKey": "<helius-api-key>",
+        "DbConnectionString": "<db-connection-string>",
+        "DbName": "TokenIndexerDb",
+        "SbConnectionString": "<service-bus-connection-string>",
+        "WalletQueue": "wallet-queue"
+    }
+}

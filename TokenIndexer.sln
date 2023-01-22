@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARM", "ARM", "{ED0AA6BF-5770-47B9-AC7C-639E78B7F929}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{15C9AFF9-694A-4FBC-809B-4DE113D93011}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4A25947D-3964-410E-9085-EECA15F7FF05}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+		build.yml = build.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{8099B275-5FAB-4690-ACAB-1935FDF8FC66}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenIndexer.Data", "TokenIndexer.Data\TokenIndexer.Data.csproj", "{485114F3-9CAE-4ACC-BA96-D032A083C09C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenIndexer.Services.Snapshot.Trigger", "TokenIndexer.Services.Snapshot.Trigger\TokenIndexer.Services.Snapshot.Trigger.csproj", "{0681C5EC-66E3-4696-A788-0F856704FB50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenIndexer.Services.Snapshot.Capture", "TokenIndexer.Services.Snapshot.Capture\TokenIndexer.Services.Snapshot.Capture.csproj", "{E8B4C238-E868-4DC1-96E8-8AE7A847D2C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenIndexer.Domain", "TokenIndexer.Domain\TokenIndexer.Domain.csproj", "{ADC8282D-8347-48A4-BCF4-733D5222BF20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TriggerFunction", "TriggerFunction", "{E76B3CC1-F907-4AF3-B0F7-AF7C3F4CA1CB}"
+	ProjectSection(SolutionItems) = preProject
+		azuredeploy.triggerfunction.json = azuredeploy.triggerfunction.json
+		azuredeploy.triggerfunction.parameters.beta.json = azuredeploy.triggerfunction.parameters.beta.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptureFunction", "CaptureFunction", "{19A2021F-AA6F-4A1E-93EB-E3A5B81B0584}"
+	ProjectSection(SolutionItems) = preProject
+		azuredeploy.capturefunction.json = azuredeploy.capturefunction.json
+		azuredeploy.capturefunction.parameters.beta.json = azuredeploy.capturefunction.parameters.beta.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenIndexer.Web", "TokenIndexer.Web\TokenIndexer.Web.csproj", "{C7F93414-ABC8-471B-8171-CE786CD564F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenIndexer.Tests", "TokenIndexer.Tests\TokenIndexer.Tests.csproj", "{B9D68239-A20A-4165-A173-7FDDB9687A3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{7B8E4D2C-46D7-4D37-A130-92B82EF3A87C}"
+	ProjectSection(SolutionItems) = preProject
+		azuredeploy.webapp.json = azuredeploy.webapp.json
+		azuredeploy.webapp.parameters.beta.json = azuredeploy.webapp.parameters.beta.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{485114F3-9CAE-4ACC-BA96-D032A083C09C} = {15C9AFF9-694A-4FBC-809B-4DE113D93011}
+		{0681C5EC-66E3-4696-A788-0F856704FB50} = {15C9AFF9-694A-4FBC-809B-4DE113D93011}
+		{E8B4C238-E868-4DC1-96E8-8AE7A847D2C6} = {15C9AFF9-694A-4FBC-809B-4DE113D93011}
+		{ADC8282D-8347-48A4-BCF4-733D5222BF20} = {15C9AFF9-694A-4FBC-809B-4DE113D93011}
+		{E76B3CC1-F907-4AF3-B0F7-AF7C3F4CA1CB} = {ED0AA6BF-5770-47B9-AC7C-639E78B7F929}
+		{19A2021F-AA6F-4A1E-93EB-E3A5B81B0584} = {ED0AA6BF-5770-47B9-AC7C-639E78B7F929}
+		{C7F93414-ABC8-471B-8171-CE786CD564F7} = {15C9AFF9-694A-4FBC-809B-4DE113D93011}
+		{B9D68239-A20A-4165-A173-7FDDB9687A3A} = {15C9AFF9-694A-4FBC-809B-4DE113D93011}
+		{7B8E4D2C-46D7-4D37-A130-92B82EF3A87C} = {ED0AA6BF-5770-47B9-AC7C-639E78B7F929}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{485114F3-9CAE-4ACC-BA96-D032A083C09C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{485114F3-9CAE-4ACC-BA96-D032A083C09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{485114F3-9CAE-4ACC-BA96-D032A083C09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{485114F3-9CAE-4ACC-BA96-D032A083C09C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0681C5EC-66E3-4696-A788-0F856704FB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0681C5EC-66E3-4696-A788-0F856704FB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0681C5EC-66E3-4696-A788-0F856704FB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0681C5EC-66E3-4696-A788-0F856704FB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8B4C238-E868-4DC1-96E8-8AE7A847D2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8B4C238-E868-4DC1-96E8-8AE7A847D2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8B4C238-E868-4DC1-96E8-8AE7A847D2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8B4C238-E868-4DC1-96E8-8AE7A847D2C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC8282D-8347-48A4-BCF4-733D5222BF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC8282D-8347-48A4-BCF4-733D5222BF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC8282D-8347-48A4-BCF4-733D5222BF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC8282D-8347-48A4-BCF4-733D5222BF20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F93414-ABC8-471B-8171-CE786CD564F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F93414-ABC8-471B-8171-CE786CD564F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F93414-ABC8-471B-8171-CE786CD564F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F93414-ABC8-471B-8171-CE786CD564F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9D68239-A20A-4165-A173-7FDDB9687A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D68239-A20A-4165-A173-7FDDB9687A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D68239-A20A-4165-A173-7FDDB9687A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D68239-A20A-4165-A173-7FDDB9687A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hpName": {
+      "value": "beta-hp-snapshot-capture"
+    },
+    "faName": {
+      "value": "beta-fa-snapshot-capture"
+    },
+    "saName": {
+      "value": "tistoragecf"
+    },
+    "saSKU": {
+      "value": "Standard_LRS"
+    },
+    "aiName": {
+      "value": "beta-ai-snapshot-capture"
+    },
+    "rpcBaseAddress": {
+      "value": "https://rpc.helius.xyz"
+    },
+    "nftApiBaseAddress": {
+      "value": "https://api.helius.xyz"
+    },
+    "dbConnectionString": {
+      "value": "<your-db-connection-string>"
+    },
+    "dbName": {
+      "value": "TokenIndexerDb"
+    },
+    "sbConnectionString": {
+      "value": "<your-sb-connection-string>"
+    },
+    "apiKey": {
+      "value": "<your-helius-api-key>"
+    }
+  }
+}

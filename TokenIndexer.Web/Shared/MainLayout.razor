@@ -1,0 +1,40 @@
+@inherits LayoutComponentBase
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenLayout style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body';">
+    <RadzenHeader>
+        <div class="container-fluid">
+            <div class="row justify-content-start align-items-center">
+                <div class="col-6 d-flex align-items-center ps-0 pl-0">
+                    <RadzenSidebarToggle Click="@SidebarToggleClick"></RadzenSidebarToggle>
+                </div>
+                <div class="col-6 d-flex align-items-center justify-content-end pr-0 pe-0">
+                </div>
+            </div>
+        </div>
+    </RadzenHeader>
+    <RadzenBody Expanded="@sidebarExpanded">
+        <div class="container-fluid pt-2 pt-md-3 pt-lg-4 pt-xl-5 pb-2 pb-lg-5" style="max-width: 1440px;">
+            <div class="row">
+                <div class="col">
+                @Body
+                </div>
+            </div>
+        </div>
+    </RadzenBody>
+    <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2">
+        <div class="py-3 py-lg-4" style="color: var(--rz-primary-light); padding: var(--rz-panel-menu-item-padding); border-bottom: var(--rz-panel-menu-item-border); display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+            <RadzenImage Path="images/index.png" Class="rounded-circle float-start me-3" Style="width: 100px; height: 100px;"/>
+            <RadzenText Text="TokenIndexer" TextStyle="TextStyle.Subtitle1" class="mb-0" style="color: var(--rz-primary-light);"/>
+        </div>
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="Insights" Path="/" />
+        </RadzenPanelMenu>
+        <div class="py-3 py-md-4" style="padding: var(--rz-panel-menu-item-padding);">
+            <RadzenText Text="TokenIndexer v1.0.0" TextStyle="TextStyle.Caption" style="color: var(--rz-text-disabled-color);" TagName="TagName.P" TextAlign="Radzen.TextAlign.Center" />
+        </div>
+    </RadzenSidebar>
+</RadzenLayout>

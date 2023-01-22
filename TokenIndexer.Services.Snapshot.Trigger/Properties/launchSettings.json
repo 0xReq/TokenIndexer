@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "TokenIndexer.Services.Snapshot.Trigger": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7087",
+      "launchBrowser": false
+    }
+  }
+}
